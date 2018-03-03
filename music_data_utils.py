@@ -709,7 +709,11 @@ class MusicDataLoader(object):
         midi_files[genre][composer] = []
         for url in sources[genre][composer]:
           print url
-          response = urllib2.urlopen(url)
+          try:
+          	response = urllib2.urlopen(url)
+          except urllib2.HTTPError:
+          	print("URL", url, "could not be read.")
+          	continue
           #if 'classicalmidi' in url:
           #  headers = response.info()
           #  print headers
